@@ -14,3 +14,8 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology
   })
 
 app.use(express.static('public'));
+
+const Message = mongoose.model('Mesage', {
+  name: String,
+  message: String
+});
