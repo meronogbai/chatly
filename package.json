@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/meronokbay/chatly/issues"
   },
-  "homepage": "https://github.com/meronokbay/chatly#readme"
+  "homepage": "https://github.com/meronokbay/chatly#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
