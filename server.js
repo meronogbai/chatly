@@ -1,17 +1,18 @@
 require('dotenv').config();
 const express = require('express');
+const http = require('http');
 const mongoose = require('mongoose');
+const { Server } = require("socket.io");
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    app.listen(PORT);
-  })
-  .catch(err => {
-    console.log(err);
-  })
+    server.listen(PORT);
+  });
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -36,6 +37,7 @@ app.post('/messages', (req, res) => {
   const message = new Message(req.body);
   message.save()
     .then(() => {
+      io.emit('message', message);
       res.sendStatus(200);
     })
     .catch(() => {
