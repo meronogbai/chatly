@@ -33,7 +33,6 @@ app.get('/messages', (req, res) => {
 });
 
 app.post('/messages', (req, res) => {
-  console.log(req.body);
   const message = new Message(req.body);
   message.save()
     .then(() => {
