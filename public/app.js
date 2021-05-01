@@ -1,6 +1,10 @@
 const messageForm = document.getElementById('messageForm');
 const messagesDiv = document.getElementById('messagesDiv');
 
+const socket = io();
+socket.on('message', message => {
+  messagesDiv.innerHTML += `<h4>${message.name}</h4><p>${message.message}</p>`;
+});
 
 fetch('/messages')
   .then(response => response.json())
